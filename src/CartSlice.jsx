@@ -8,35 +8,35 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addItem: (state, action) => {
       const product = action.payload;
-      if (!state.items[product.id]) {
+
+      if (state.items[product.id]) {
+        state.items[product.id].quantity += 1;
+      } else {
         state.items[product.id] = { ...product, quantity: 1 };
       }
     },
-    increaseQuantity: (state, action) => {
-      const id = action.payload;
-      if (state.items[id]) {
-        state.items[id].quantity += 1;
-      }
-    },
-    decreaseQuantity: (state, action) => {
-      const id = action.payload;
-      if (state.items[id]) {
-        state.items[id].quantity -= 1;
-        if (state.items[id].quantity <= 0) {
-          delete state.items[id];
-        }
-      }
-    },
-    removeFromCart: (state, action) => {
+    removeItem: (state, action) => {
       delete state.items[action.payload];
+    },
+    updateQuantity: (state, action) => {
+      const { id, amount } = action.payload;
+
+      if (!state.items[id]) {
+        return;
+      }
+
+      state.items[id].quantity += amount;
+
+      if (state.items[id].quantity <= 0) {
+        delete state.items[id];
+      }
     },
   },
 });
 
-export const { addToCart, increaseQuantity, decreaseQuantity, removeFromCart } =
-  cartSlice.actions;
+export const { addItem, removeItem, updateQuantity } = cartSlice.actions;
 
 export const selectCartItems = (state) => Object.values(state.cart.items);
 
@@ -50,4 +50,3 @@ export const selectCartTotal = (state) =>
   );
 
 export default cartSlice.reducer;
-
