@@ -34,7 +34,7 @@ Enter time period in years:
 2
 ```
 
-The script prints the simple interest amount.
+The script displays the simple interest amount.
 
 ## Contributing
 
