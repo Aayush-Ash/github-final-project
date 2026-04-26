@@ -1,0 +1,22 @@
+$ curl -s https://api.github.com/repos/Aayush-Ash/e-plantShopping/pulls
+[
+  {
+    "state": "open",
+    "title": "Revert typo fix",
+    "head": {
+      "label": "Aayush-Ash:bug-fix-revert",
+      "repo": {
+        "full_name": "Aayush-Ash/e-plantShopping",
+        "html_url": "https://github.com/Aayush-Ash/e-plantShopping"
+      }
+    },
+    "base": {
+      "label": "main",
+      "repo": {
+        "full_name": "ibm-developer-skills-network/github-final-project",
+        "html_url": "https://github.com/ibm-developer-skills-network/github-final-project"
+      }
+    },
+    "mergeable": true
+  }
+]
