@@ -73,7 +73,7 @@ app.put("/customer/auth/review/:isbn", (req, res) => {
   return res.status(200).json({ message: "The book review has been added/updated successfully.", book: books[isbn] });
 });
 
-app.delete("/customer/auth/review/:isbn", (req, res) => {
+function deleteReview(req, res) {
   const { isbn } = req.params;
   const username = req.body.username || req.query.username || "registered_user";
 
@@ -82,8 +82,11 @@ app.delete("/customer/auth/review/:isbn", (req, res) => {
   }
 
   delete books[isbn].reviews[username];
-  return res.status(200).json({ message: "The book review has been deleted successfully.", book: books[isbn] });
-});
+  return res.status(200).json({ message: `Review for ISBN ${isbn} deleted`, book: books[isbn] });
+}
+
+app.delete("/customer/auth/review/:isbn", deleteReview);
+app.delete("/review/:isbn", deleteReview);
 
 app.listen(PORT, () => {
   console.log(`Book review server is running on port ${PORT}`);
