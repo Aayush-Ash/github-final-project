@@ -47,11 +47,13 @@ router.get("/review/:isbn", (req, res) => {
   return res.status(200).json(book.reviews);
 });
 
-function getAllBooks(callback) {
-  axios
-    .get(`${API_BASE_URL}/`)
-    .then((response) => callback(null, response.data))
-    .catch((error) => callback(error));
+async function getAllBooks(callback) {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/`);
+    callback(null, response.data);
+  } catch (error) {
+    callback(error);
+  }
 }
 
 function getBookByISBN(isbn) {
